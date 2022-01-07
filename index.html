@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="./marked.js"></script>
+        <style>
+            * {
+                background-color: beige;
+            }
+            
+            .card-header {
+                font-weight: 500;
+                font-size: x-large;
+            }
+            
+        </style>
+        <script>
+
+            function updatePreview() {
+                let markDown = marked.parse(document.getElementById("editor").value);
+                document.getElementById("preview").innerHTML = markDown;
+            }
+
+            function setDefault() {
+                let editorField = document.getElementById("editor");
+                let defaultValue = `\
+# Welcome to my React Markdown Previewer!
+## This is a sub-heading...
+### And here's some other cool stuff:
+
+Heres some code, \`<div></div>\`, between 2 backticks.
+
+
+// this is multi-line code:
+
+\`\`\`
+    function anotherExample(firstLine, lastLine) {
+        if (firstLine == "" && lastLine == "") {
+    return multiLineCode;
+  }
+}
+\`\`\`
+
+You can also make text **bold**... whoa!
+Or _italic_.
+Or... wait for it... **_both!_**
+And feel free to go crazy ~~crossing stuff out~~.
+
+There's also [links](https://www.freecodecamp.org), and
+> Block Quotes!
+
+And if you want to get really crazy, even tables:
+
+Wild Header | Crazy Header | Another Header?
+------------ | ------------- | -------------
+Your content can | be here, and it | can be here....
+And here. | Okay. | I think we get it.
+
+- And of course there are lists.
+  - Some are bulleted.
+     - With different indentation levels.
+        - That look like this.
+
+
+1. And there are numbered lists too.
+1. Use just 1s if you want!
+1. And last but not least, let's not forget embedded images:
+
+![freeCodeCamp Logo](https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg)
+
+                `;
+                editorField.value = defaultValue;
+                let markDown = marked.parse(editorField.value);
+                document.getElementById("preview").innerHTML = markDown;
+            }
+
+        </script>
+    </head>
+
+    <body onload="setDefault()">
+        <div class="container-fluid d-flex flex-column">
+            <div class="card border-success mx-auto my-3 bg-info"  style="max-width: 50rem;">
+                <div class="card-header bg-transparent border-success text-center">Editor</div>
+                <div class="card-body text-success bg-info">
+                    <textarea name="" id="editor" cols="70" rows="8" style="resize: none; background-color: rgb(25, 213, 238);" oninput="updatePreview()"></textarea>
+                </div>
+            </div>
+
+            <div class="card border-success mx-auto bg-info" style="width: 60rem;">
+                <div class="card-header bg-transparent border-success text-center">Preview</div>
+                <div id="preview" class="card-bod text-success px-3">
+                    
+                </div>
+             </div>
+        </div>
+        
+        
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    </body>
+</html>
